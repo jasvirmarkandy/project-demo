@@ -16,13 +16,13 @@ if ($conn->connect_error) {
 die("Connection failed: " . $conn->connect_error);
 } 
 $slug=GetShortUrl($url);
-$conn->close();
 ?>
 <br><br><center>
 <?php
-echo 'Short URL:  <a href="'.$url.'" target="_blank">'.$base_url.$slug.'</a>';
+echo 'Short URL:  <a href="index.php?redirect='.$slug.'" target="_blank">'.$base_url.$slug.'</a>';
 ?> <br><br><?php
-echo '<a href="index.php" target="_blank">Click Here To Return To Home</a>';
+GetRedirectUrl($slug);
+echo '<a href="index.php" target="_blank" onclick>Click Here To Return To Home</a>';
 ?> </center><?php
 } 
 else 
@@ -37,7 +37,7 @@ else
 <h1>Put Your Url Here</h1>
 <form>
 <p><input style="width:500px" type="url" name="url" required /></p>
-<p><input type="submit" /></p>
+<p><input type="submit" value="Save" /></p>
 </form>
 </center>
 <?php
@@ -53,8 +53,8 @@ $row = $result->fetch_assoc();
  return $row['short_code'];
 } else {
 $short_code = generateUniqueID();
-$sql = "INSERT INTO url_shorten (url, short_code)
-VALUES ('".$url."', '".$short_code."')";
+$sql = "INSERT INTO url_shorten (url, short_code, hits)
+VALUES ('".$url."', '".$short_code."', '0')";
 if ($conn->query($sql) === TRUE) {
 return $short_code;
 } else { 
