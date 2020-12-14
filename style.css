@@ -1,0 +1,62 @@
+table 
+{  
+    border-collapse: collapse;  
+}
+
+input, button
+{   
+    height: 34px;   
+}   
+    
+body
+{  
+    font: 14px 
+    sans-serif; 
+}
+
+.inline
+{   
+    display: inline-block;   
+    float: right;   
+    margin: 20px 0px;   
+}   
+  
+.wrapper
+{
+    width: 350px; 
+    padding: 20px;
+}
+
+.pagination
+{   
+    display: inline-block;   
+}   
+    
+.pagination a 
+{   
+    font-weight:bold;   
+    font-size:18px;   
+    color: black;   
+    float: left;   
+    padding: 8px 16px;   
+    text-decoration: none;   
+    border:1px solid black;   
+}   
+
+.pagination a.active 
+{   
+    background-color: pink;
+}   
+
+.pagination a:hover:not(.active) 
+{   
+    background-color: skyblue;   
+}   
+
+.center 
+{
+    margin: 0 auto;
+    text-align: left;
+    width: 800px;
+}
+

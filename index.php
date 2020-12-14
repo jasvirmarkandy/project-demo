@@ -1,20 +1,36 @@
-<?php
+<?php 
+session_start();
+include('header.php');
+include_once("db_connect.php");
+?>
+<title>Welcome</title>
+<script type="text/javascript" src="script/ajax.js"></script>
 
-$servername = 'localhost';
-$username = 'root';
-$password = '';
-$dbname = 'shorten_db';
-$base_url='http://localhost/myapp/'; 
+<div class="container">
+		
+		<br>
+		<br>
+		<div class="collapse navbar-collapse" id="navbar1">
+			<ul class="nav navbar-nav navbar-left">
+				<?php if (isset($_SESSION['user_id'])) { ?>
+				<li><p class="navbar-text"><strong>Welcome!</strong> You're signed in as <strong><?php echo $_SESSION['user_name']; ?></strong></p></li>
+				<li><a href="logout.php">Log Out</a></li>
+				<?php } else { ?>
+				<li><a href="login.php">Login</a></li>
+				<li><a href="register.php">Sign Up</a></li>
+				<?php } ?>
+			</ul>
+		</div>
+		
+		
+</div>	
+<?php
 
 if(isset($_GET['url']) && $_GET['url']!="")
 { 
 $url=urldecode($_GET['url']);
 if (filter_var($url, FILTER_VALIDATE_URL)) 
 {
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-die("Connection failed: " . $conn->connect_error);
-} 
 $slug=GetShortUrl($url);
 ?>
 <br><br><center>
@@ -37,40 +53,7 @@ else
 <head>
 	<!-- Bootstrap CDN -->
     <link rel="stylesheet"  
-    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">   
-     <style>   
-    table {  
-        border-collapse: collapse;  
-    }  
-        .inline{   
-            display: inline-block;   
-            float: right;   
-            margin: 20px 0px;   
-        }   
-         
-        input, button{   
-            height: 34px;   
-        }   
-  
-    .pagination {   
-        display: inline-block;   
-    }   
-    .pagination a {   
-        font-weight:bold;   
-        font-size:18px;   
-        color: black;   
-        float: left;   
-        padding: 8px 16px;   
-        text-decoration: none;   
-        border:1px solid black;   
-    }   
-    .pagination a.active {   
-            background-color: pink;   
-    }   
-    .pagination a:hover:not(.active) {   
-        background-color: skyblue;   
-    }   
-        </style>   
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">     
 </head>
 <body>
 <center>
@@ -81,7 +64,7 @@ else
 </form>
 </center>
 <?php  
-				    $conn = mysqli_connect('localhost', 'root', '', 'shorten_db');  
+				    $conn = mysqli_connect('localhost', 'root', '', 'project_demo_db');  
 				        if (! $conn) {  
 				    die("Connection failed" . mysqli_connect_error());  
 				    }  
@@ -257,3 +240,5 @@ die("Invalid Link!");
 }
 }
 ?>
+</body></html>
+ 
