@@ -16,5 +16,15 @@ CREATE TABLE IF NOT EXISTS `users` (
   `pass` varchar(100) DEFAULT NULL,
   `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`user`),
+  UNIQUE KEY `username` (`user`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+CREATE TABLE IF NOT EXISTS `id_info` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `url_id` int(11) NOT NULL,
+  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (user_id) REFERENCES users(id),
+  FOREIGN KEY (url_id) REFERENCES url_shorten(id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
